@@ -1,0 +1,23 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        ws=0
+        we=0
+        total=0
+        count=0
+        while ws<len(nums):
+            if we==len(nums):
+                break
+            total+=nums[we]
+            if ws>we:
+                we=ws
+                total=nums[ws]
+            if total<k:
+                we+=1
+            elif total>k:
+                total-=nums[ws]
+                ws+=1
+            else:
+                count+=1
+                total-=nums[ws]
+                ws+=1
+        return count
